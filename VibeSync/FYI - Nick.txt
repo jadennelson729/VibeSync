@@ -1,0 +1,42 @@
+Important code files so far:
+
+// handles user authentication and authorization logic
+// technically backend code that handles the processes of logging in and managing user sessions.
+
+auth-server/authorization/authorization_code/App.js
+
+// contains the front end code for the app
+// right now has an example I found from a setup video that shows what song a user is currently playing. 
+// works with your phone, the desktop app, or the website at least (all I tested)
+
+client/src/App.js
+client/src/App.css
+
+To run this code, use npm install to install all the react dependencies and such, and then use npm run start in the terminal on VS Code
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+// also I made an App on Spotify for Developers, I just need to add you all through the User Management tab. 
+Here is a guide if you don't have an account already (thanks ChatGPT):
+
+Step-by-Step Guide to Create a Spotify Developer Account:
+
+1. Visit the Spotify Developer Website:
+
+	Go to the Spotify for Developers website.
+
+2. Log In with Existing Spotify Account:
+
+	Click on the "Log in" button in the top right corner.
+	Enter the credentials for their existing Spotify accounts (the ones they use for listening to music).
+
+3. Agree to Developer Terms:
+
+	After logging in, they may need to agree to the Spotify Developer Terms of Service. They should read the terms and click "Accept" or "Agree".
+
+4. Access the Developer Dashboard
+
+When you finish these steps, please send me your full name and email address you used to sign up for the Spotify Developer account.
+Then I can add you guys as collaborators.
+
+If you have any questions please DM me on Discord. Thanks!
