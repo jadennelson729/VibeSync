@@ -1,0 +1,10 @@
+{
+  "name": "vibesync",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm start --prefix client\" \"npm start --prefix auth-server/authorization/authorization_code\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
