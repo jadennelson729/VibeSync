@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react"
 import SpotifyWebApi from "spotify-web-api-js";
+import Login from './pages/Login/Login';
 
 const  spotifyApi = new SpotifyWebApi(); 
 
@@ -39,7 +40,7 @@ function App() {
       setLoggedIn(true)
     }
   }, [])
-
+  
   const getNowPlaying = () => {
     spotifyApi.getMyCurrentPlaybackState().then((response) => {
       console.log(response);
@@ -79,6 +80,12 @@ function App() {
     {loggedIn && (
       <button onClick = {() => getNowPlaying()}> Check Now Playing </button>
     )}
+
+    {
+    // Shows Login page
+    }
+    <Login />
+
     </div>
   );
 }
