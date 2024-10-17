@@ -1,0 +1,14 @@
+To get MongoDB up and running, run the following commands in the terminal:
+    npm install mongodb
+
+Next, create a .env file in the auth-server/authorization/authorization_code directory with the following contents:
+    "MONGO_URI="mongodb+srv://trevorburniske:<db_password>@cluster0.9nzcg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+Finally, replace <db_password> with your database user password.
+
+Check if the MongoDB connection is successful by running the following command in the terminal:
+    node app.js
+        or
+    npm run dev
+
+Lmk if you have any questions or need assistance.
