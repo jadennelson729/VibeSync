@@ -1,14 +1,20 @@
+Please create a .env file in the auth-server/authorization/authorization_code directory with the following contents:
+    "CLIENT_ID=<client_id>"
+    "CLIENT_SECRET=<client_secret>"
+
+Add the .env file to your .gitignore file to prevent it from being pushed to the repository.
+
 To get MongoDB up and running, run the following commands in the terminal:
     npm install mongodb
 
-Next, create a .env file in the auth-server/authorization/authorization_code directory with the following contents:
-    "MONGO_URI="mongodb+srv://trevorburniske:<db_password>@cluster0.9nzcg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+Next, add the following line to your .env file:
+    "MONGO_URI="mongodb+srv://<firstname_lastname>:<db_password>@cluster0.9nzcg.mongodb.net/users?retryWrites=true&w=majority&appName=Cluster0
 
-Finally, replace <db_password> with your database user password.
+Replace <firstname_lastname> with your first and last name, and <db_password> with your database password.
 
 Check if the MongoDB connection is successful by running the following command in the terminal:
-    node app.js
+    node app.js from the auth-server/authorization/authorization_code directory
         or
-    npm run dev
+    npm run dev from the root directory
 
 Lmk if you have any questions or need assistance.

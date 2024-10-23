@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    spotifyId: String,
-    displayName: String,
-    email: String,
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    spotifyId: { type: String, unique: true, sparse: true },
+    spotifyDisplayName: String,
+    email: { type: String, unique: true, sparse: true },
     profileImage: String,
-    playlists: [{
-        name: String,
-        tracks: [String] // Array of track IDs
-    }]
+    spotifyAccessToken: String,
+    spotifyRefreshToken: String,
 });
 
 module.exports = mongoose.model('User', userSchema);
