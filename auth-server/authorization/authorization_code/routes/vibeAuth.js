@@ -41,30 +41,4 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Spotify callback route
-router.post('/spotify-callback', async (req, res) => {
-    const { username, spotifyId, spotifyDisplayName, email, profileImage, spotifyAccessToken, spotifyRefreshToken } = req.body;
-    try {
-        const user = await User.findOneAndUpdate(
-            { username },
-            {
-                spotifyId,
-                spotifyDisplayName,
-                email,
-                profileImage,
-                spotifyAccessToken,
-                spotifyRefreshToken
-            },
-            { new: true }
-        );
-        if (user) {
-            res.redirect('http://localhost:3000/comparisons'); // Redirect to comparisons page
-        } else {
-            res.status(404).send('User not found');
-        }
-    } catch (error) {
-        res.status(500).send('Error updating Spotify information: ' + error.message);
-    }
-});
-
 module.exports = router;

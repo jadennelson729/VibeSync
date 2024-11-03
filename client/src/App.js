@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './pages/Login/Login';
 import SpotifyLogin from './components/SpotifyLogin';
 import Comparisons from './pages/Comparisons';
+import Results from './pages/Results';
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/spotify-login" element={<SpotifyLogin />} />
                 <Route path="/comparisons" element={<Comparisons />} />
+                <Route path="/results" element={<Results />} />
             </Routes>
         </Router>
     );

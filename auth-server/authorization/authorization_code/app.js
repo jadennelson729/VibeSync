@@ -14,6 +14,8 @@ const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db.js")
 const vibeAuth = require('./routes/vibeAuth')
 const User = require("./models/user");
+const getUserPlaylists = require('./routes/getUserPlaylists');
+const comparePlaylists = require('./routes/comparePlaylists');
 require("dotenv").config();
 
 app.use(express.static(__dirname + '/public'));
@@ -21,6 +23,8 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/vibeAuth', vibeAuth);
+app.use('/getUserPlaylists', getUserPlaylists);
+app.use('/comparePlaylists', comparePlaylists);
 
 connectDB(); // Connect to MongoDB
 
@@ -83,7 +87,7 @@ app.get('/callback', async function(req, res) {
 
             try {
                 const user = await User.findOneAndUpdate(
-                    { username: req.cookies.username }, // Assuming username is stored in cookies after VibeSync login
+                    { username: req.cookies.username },
                     {
                         spotifyId: body.id,
                         spotifyDisplayName: body.display_name,
@@ -112,32 +116,6 @@ app.get('/callback', async function(req, res) {
                 }));
         }
     }
-});
-
-app.get('/refresh_token', async function(req, res) { // Route to refresh the access token
-  const refresh_token = req.query.refresh_token;
-  const authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
-    },
-    data: querystring.stringify({
-      grant_type: 'refresh_token',
-      refresh_token: refresh_token
-    })
-  };
-
-  try {
-    const response = await axios.post(authOptions.url, authOptions.data, { headers: authOptions.headers });
-    const { access_token, refresh_token } = response.data;
-    res.send({
-      'access_token': access_token,
-      'refresh_token': refresh_token
-    });
-  } catch (error) {
-    console.error('Error refreshing token:', error);
-  }
 });
 
 // Start the server
