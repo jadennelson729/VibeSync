@@ -1,38 +1,180 @@
 /* Formatting for Login page */
-.wrapper {
+body{
+    background: rgb(17, 17, 17);
+}
+
+.wrapper1 h1 {
+    font-size: 42px;
+    color: white;
+    text-align: center;
+    margin: 80px;
+}
+
+.wrapper2 {
     width: 420px;
-    background: rgb(164, 164, 164);
+    background: rgb(65, 65, 65);
     color: #000;
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 10px;
     padding: 1px 0px;
     /* centers container horizontally and vertically */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
 }
 
-.wrapper h1 {
+.wrapper2 h1 {
     font-size: 36px;
     text-align: center;
+    color: white;
+    margin: 50px;
 }
 
-.wrapper .input-box {
-    height: 30px;
+.wrapper2 .input-box {
+    height: 40px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.input-box input {
+    border-radius: 40px;
+    width: 75%;
+    height: 100%;
+    background: rgb(217, 217, 217);
+    padding: 2px 2px 2px 10px;
+}
+
+.input-box input::placeholder {
+    color: black;
+    opacity: 0.3;
+}
+
+.wrapper2 .remember {
+    font-size: 12px;
+    margin: 0 45px 50px;
+    justify-content: space-between;
+    display: flex;
+    color: white;
     text-align: center;
 }
 
-.wrapper button {
-    width: 100px;
-    height: 25px;
+.remember label input {
+    accent-color: white;
+    margin-right: 5px;
+}
+
+.remember a {
+    color: white;
+    padding: 5px
+}
+
+.wrapper2 button {
+    width: 200px;
+    height: 50px;
     border-radius: 40px;
+    background: linear-gradient(to right, rgb(67, 145, 95), rgb(102, 37, 173));
+    border: none;
+    font-weight: bold;
     /* centers button element */
     margin: 0 auto;
     display: block;
+    color: rgb(217, 217, 217);
 }
 
-.wrapper .register {
-    font-size: 14px;
+.wrapper2 .or {
+    font-size: 20px;
     text-align: center;
-    margin: 10px 0 30px;
+    margin: 10px 0 10px 0;
+    color: white;
+}
+.or::before {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: 40px;
+    top: 77%;
+}
+.or::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 2px;
+    background: white;
+    position: absolute;
+    right: 40px;
+    top: 77%;
+}
+
+.wrapper2 .register {
+    margin: 0 0 40px 0;
+}
+
+.circle1 {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(67, 145, 95);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.circle2 {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(67, 145, 95);
+    border-radius: 50%;
+    filter: blur(50px);
+    margin: 0 0 0 700px;
+    position: fixed;
+    right: 0;
+    transform: translate(50%, -25%)
+}
+
+.circle3 {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(67, 145, 95);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: fixed;
+    transform: translate(-75%, 50%);
+}
+
+.wrapper3 {
+    color: white;
+    text-align: center;
+    vertical-align: bottom;
+    position: absolute;
+    top: 94%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bold {
+    font-weight: bold;
+    padding: 0 20px 0 0;
+}
+
+.about {
+    padding: 0 20px;
+}
+
+.contact {
+    padding: 0 20px;
+}
+
+.policy {
+    padding: 0 20px;
+}
+
+.copyright {
+    margin: 30px;
+    font-size: 10px;
 }

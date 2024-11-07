@@ -24,37 +24,63 @@ const Login = () => {
     };
 
     return (
-        <div className='wrapper'>
-            <h1>{isLogin ? 'Login' : 'Signup'}</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="input-box">
-                    <input
-                        type="text"
-                        placeholder='Username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-box">
-                    <input
-                        type="password"
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">{isLogin ? 'Login' : 'Signup'}</button>
-            </form>
-            <div className="register">
-                <p>
-                    {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
-                    <button onClick={() => setIsLogin(!isLogin)}>
-                        {isLogin ? 'Register' : 'Login'}
-                    </button>
-                </p>
+        <div>
+            <div className='wrapper1'>
+                <h1>VibeSync</h1>
             </div>
+
+            <div className='wrapper2'>
+                <h1>{isLogin ? 'Login' : 'Signup'}</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-box">
+                        <input
+                            type="text"
+                            placeholder='Username'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            />
+                    </div>
+                    <div className="input-box">
+                        <input
+                            type="password"
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            />
+                    </div>
+
+                    <div className='remember'>
+                    <label><input type="checkbox" />Remember me</label>
+                    <a href="">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit">{isLogin ? 'Login' : 'Signup'}</button>
+                </form>
+                <div className="or">
+                    <p>
+                        {isLogin ? "or" : 'or'}{' '}
+                    </p>
+                </div>
+                <div className="register">
+                    <button onClick={() => setIsLogin(!isLogin)}>
+                                {isLogin ? 'Register' : 'Login'}
+                    </button>
+                </div>
+            </div>
+
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+
+            <div className='wrapper3'>
+                <p><span class="bold">VibeSync</span> <span class="about">About Us</span> <span class="contact">Contact</span> <span class="policy">Private Policy</span></p>
+                <div className = 'copyright'>
+                    <p>© 2024 VibeSync. All rights reserved.</p>
+                </div>
+            </div>
+
         </div>
     );
 };
