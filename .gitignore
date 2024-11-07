@@ -1,0 +1,4 @@
+# THIS IS THE GITIGNORE FOR THE ROOT
+
+auth-server/authorization/authorization_code/.env
+node_modules

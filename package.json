@@ -6,5 +6,19 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.7.3",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
+    "react-scripts": "^5.0.1",
+    "spotify-web-api-js": "^1.5.2"
   }
 }

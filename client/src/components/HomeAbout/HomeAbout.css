@@ -1,0 +1,39 @@
+.HomeAbout{
+    margin: 100px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.aboutImage img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.aboutImage{
+    flex-basis: 40%;
+}
+
+.about-right{
+    color: #FFFFFF;
+    flex-basis: 50%;
+}
+
+.HomeAbout h3{
+    font-weight: 600;
+    font-weight: 16px;
+    color: #1DB954
+}
+
+.HomeAbout h2{
+    font-size: 35px;
+    color: #FFFFFF;
+    margin: 10px 0;
+    max-width: 400px;
+}
+
+.HomeAbout p{
+    color: #808080;
+    margin-bottom: 15px;
+}
