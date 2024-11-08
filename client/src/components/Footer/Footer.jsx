@@ -8,7 +8,7 @@ const Footer = () => {
   
   return (
     <div className='footer'>
-        <p>© 2024 Vibesync. All rights reserved.</p>
+        <p>© 2024 VibeSync. All rights reserved.</p>
         <ul>
             <li onClick={() => navigate('/aboutus')} >About Us</li>
             <li><Link to='contact' smooth={true} offset={-245} duration={500}>Contact</Link></li>

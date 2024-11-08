@@ -40,4 +40,5 @@
 
 .HomeAbout button{
     transform: translateX(100%);
+    background: #2f8777;
 }

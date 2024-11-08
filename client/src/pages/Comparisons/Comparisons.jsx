@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-js';
+import './Comparisons.css';
 const spotifyApi = new SpotifyWebApi();
 
 const getTokenFromUrl = () => {
@@ -32,7 +34,7 @@ const Comparisons = () => {
     const [otherPlaylist, setOtherPlaylist] = useState('');
 
     useEffect(() => {
-        const token = getTokenFromUrl().access_token;
+        const token = getTokenFromUrl().access_token || localStorage.getItem('access_token');
         window.location.hash = '';
         if (token) {
             spotifyApi.setAccessToken(token);

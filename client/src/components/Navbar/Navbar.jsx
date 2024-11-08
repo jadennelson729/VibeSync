@@ -22,11 +22,11 @@ const Navbar = () => {
     }
 
   return (
-    /* condition that checks whether or not the user has scrolled, if so make opaque */
+    /* condition that checks whether the user has scrolled, if so make opaque */
     <nav className={`container ${sticky? 'dark-nav' : ''}`}>
       <img src= {logo} alt="" className='logo' />
       <ul className={mobileMenu?'':'hide-mobile-menu'}>
-        <li onClick={() => navigate('/Home')} > Home </li>
+        <li onClick={() => navigate('/home')} > Home </li>
         <li onClick={() => navigate('/comparisons')}> Compare </li>
         <li onClick={() => navigate('/about')}> About </li>
         <li> <Link to='contact' smooth={true} offset={-245} duration={500}>Contact</Link></li>

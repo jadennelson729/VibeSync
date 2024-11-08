@@ -75,7 +75,7 @@ const Login = () => {
             <div class="circle3"></div>
 
             <div className='wrapper3'>
-                <p><span class="bold">VibeSync</span> <span class="about">About Us</span> <span class="contact">Contact</span> <span class="policy">Private Policy</span></p>
+                <p><span class="bold">VibeSync</span> <span class="about">About Us</span> <span class="contact">Contact</span> <span class="policy">Privacy Policy</span></p>
                 <div className = 'copyright'>
                     <p>© 2024 VibeSync. All rights reserved.</p>
                 </div>

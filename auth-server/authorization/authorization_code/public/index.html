@@ -4,6 +4,9 @@
     <title>Spotify Authorization</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style type="text/css">
+      body {
+        background-color: rgb(17, 17, 17);;
+      }
       #login, #loggedin {
         display: none;
       }
@@ -12,6 +15,15 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 500px;
+      }
+      #login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+      }
+      #login h1 {
+        color: white;
       }
     </style>
   </head>
@@ -139,4 +151,3 @@
     </script>
   </body>
 </html>
-

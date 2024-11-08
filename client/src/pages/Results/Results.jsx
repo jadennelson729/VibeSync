@@ -31,7 +31,7 @@ const Results = () => {
             <h2>Comparison Results</h2>
             <p>Current Playlist ID: {currentPlaylist}</p>
             <p>Other Playlist ID: {otherPlaylist}</p>
-            <p>Similarity: ${similarity}%</p>
+            <p>Similarity: {similarity}%</p>
         </div>
     );
 };

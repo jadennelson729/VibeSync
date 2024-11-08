@@ -7,7 +7,6 @@ body{
     font-size: 42px;
     color: white;
     text-align: center;
-    margin: 80px;
 }
 
 .wrapper2 {
@@ -150,28 +149,42 @@ body{
 .wrapper3 {
     color: white;
     text-align: center;
-    vertical-align: bottom;
     position: absolute;
     top: 94%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper3 p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 .bold {
     font-weight: bold;
-    padding: 0 20px 0 0;
+    padding: 0 20px;
+    margin: 0;
 }
 
 .about {
     padding: 0 20px;
+    margin: 0;
 }
 
 .contact {
     padding: 0 20px;
+    margin: 0;
 }
 
 .policy {
     padding: 0 20px;
+    margin: 0;
 }
 
 .copyright {
