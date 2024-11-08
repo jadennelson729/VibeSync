@@ -53,7 +53,7 @@ a{
   font-size: 16px;
   border-radius: 30px;
   cursor: pointer;
-  border: 4;
+  border: 0;
   outline: 0;
   display: inline-flex;
   align-items: center;
