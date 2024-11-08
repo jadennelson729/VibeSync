@@ -1,8 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import './HomeAbout.css'
 import aboutImage from '../../assets/about_image.png'
 
 const HomeAbout = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='HomeAbout'>
       <div className='aboutImage'>
@@ -14,7 +17,7 @@ const HomeAbout = () => {
       <p> Track, artist, and genre comparisons made easy with our custom algorithm. 
       Discover personalized insights and connect with your friends by comparing musical preferences effortlessly.
       </p>
-      <button className='altbtn'> How it Works </button> 
+      <button className='altbtn' onClick={() => navigate('/about')} > How It Works </button> 
       </div>
     </div>
   )

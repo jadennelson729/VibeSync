@@ -1,0 +1,20 @@
+.footer{
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #CCCCCC;
+    color: #FFFFFF;
+    padding: 15px 100px;
+}
+
+.footer ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.footer ul li:not(.btn):hover {
+    color: #1DB954;
+    cursor: pointer;
+}
