@@ -12,7 +12,7 @@ const Footer = () => {
         <ul>
             <li onClick={() => navigate('/aboutus')} >About Us</li>
             <li><Link to='contact' smooth={true} offset={-245} duration={500}>Contact</Link></li>
-            <li>Privacy Policy</li>
+            <li onClick={() => navigate('/privatepolicy')}>Privacy Policy</li>
         </ul>
     </div>
   )

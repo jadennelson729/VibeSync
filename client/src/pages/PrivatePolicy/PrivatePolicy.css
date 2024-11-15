@@ -1,0 +1,35 @@
+.privatePolicyWrapper1 {
+    background: rgb(28, 28, 28);
+}
+
+.privatePolicyWrapper1 h1 {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 100px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border: 5px solid rgb(15, 15, 15);
+}
+
+.privatePolicyWrapper2 {
+    margin-left: 300px;
+    margin-right: 300px;
+    background: rgb(40, 40, 40);
+    border: 5px solid rgb(15, 15, 15);
+    padding: 40px 40px 40px 40px;
+    min-width: 500px;
+}
+
+.privatePolicyWrapper2 h2 {
+    margin-top: 20px;
+    font-size: 36px;
+}
+
+.privatePolicyWrapper2 h3 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.privatePolicyWrapper2 p {
+    margin-top: 20px;
+}

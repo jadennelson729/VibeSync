@@ -48,7 +48,7 @@ const About = () => {
         </div>
 
       </div>
-
+      
       <div className="aboutCircle1"></div>
       <div className="aboutCircle2"></div>
 
