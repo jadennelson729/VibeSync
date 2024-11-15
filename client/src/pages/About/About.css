@@ -1,0 +1,116 @@
+.aboutWrapper h1 {
+    text-align: center;
+    margin: 100px 0px 0px 0px;
+    font-size: 50px;
+}
+
+.aboutWrapper h2 {
+    text-align: center;
+    margin: 30px 0px 0px 0px;
+}
+
+.aboutWrapper p {
+    text-align: left;
+    margin: 60px 0px 0px 200px;
+    width: 45%;
+}
+
+.aboutWrapper .image {
+    background-image:url(../../assets/comparison.png);
+    width: 700px;
+    height: 600px;
+    margin-left: 55%;
+    transform: translate(0px, -300px);
+    position: absolute;
+    z-index: -1;
+}
+
+.aboutBackgroundImage img {
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    z-index: -2;
+    top: 0;
+}
+
+.aboutGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.aboutColumn1 {
+    background: rgb(40, 40, 40);
+    min-width: 30%;
+    padding: 40px 20px 60px 20px;
+    border: 2px solid rgb(15, 15, 15);
+    text-align: center;
+    margin-left: 200px;
+    border-radius: 10px;
+}
+
+.aboutColumn1 img {
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.aboutColumn2 {
+    background: rgb(40, 40, 40);
+    min-width: 30%;
+    padding: 40px 20px 60px 20px;
+    border: 2px solid rgb(15, 15, 15);
+    text-align: center;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+
+.aboutColumn2 .symbol {
+    font-size: 100px;
+}
+
+.aboutColumn3 {
+    background: rgb(40, 40, 40);
+    min-width: 30%;
+    padding: 40px 20px 60px 20px;
+    border: 2px solid rgb(15, 15, 15);
+    text-align: center;
+    margin-right: 200px;
+    border-radius: 10px;
+}
+
+.aboutColumn3 img {
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.aboutCircle1 {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(67, 145, 95);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: fixed;
+    left: 0;
+    left: 35%;
+    transform: translate(-200%, -125%);
+    z-index: -3;
+}
+
+.aboutCircle2 {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(67, 145, 95);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: fixed;
+    right: 0;
+    transform: translate(50%, -25%);
+    z-index: -3;
+}

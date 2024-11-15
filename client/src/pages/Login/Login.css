@@ -37,7 +37,8 @@ body{
 }
 
 .input-box input {
-    border-radius: 40px;
+    border-radius: 0px;
+    border: none;
     width: 75%;
     height: 100%;
     background: rgb(217, 217, 217);
@@ -72,7 +73,7 @@ body{
     width: 200px;
     height: 50px;
     border-radius: 40px;
-    background: linear-gradient(to right, rgb(67, 145, 95), rgb(102, 37, 173));
+    background: #8a4dff;
     border: none;
     font-weight: bold;
     /* centers button element */
@@ -122,6 +123,7 @@ body{
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
+    z-index: -1;
 }
 
 .circle2 {
@@ -133,7 +135,8 @@ body{
     margin: 0 0 0 700px;
     position: fixed;
     right: 0;
-    transform: translate(50%, -25%)
+    transform: translate(50%, -25%);
+    z-index: -1;
 }
 
 .circle3 {
@@ -144,50 +147,12 @@ body{
     filter: blur(50px);
     position: fixed;
     transform: translate(-75%, 50%);
+    z-index: -1;
 }
 
-.wrapper3 {
-    color: white;
-    text-align: center;
-    position: absolute;
-    top: 94%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.wrapper3 p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-
-.bold {
-    font-weight: bold;
-    padding: 0 20px;
-    margin: 0;
-}
-
-.about {
-    padding: 0 20px;
-    margin: 0;
-}
-
-.contact {
-    padding: 0 20px;
-    margin: 0;
-}
-
-.policy {
-    padding: 0 20px;
-    margin: 0;
-}
-
-.copyright {
-    margin: 30px;
-    font-size: 10px;
+.loginFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

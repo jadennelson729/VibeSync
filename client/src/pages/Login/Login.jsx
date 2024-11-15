@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
+import Footer from '../../components/Footer/Footer'
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -70,17 +71,13 @@ const Login = () => {
                 </div>
             </div>
 
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
+            <div className="circle1"></div>
+            <div className="circle2"></div>
+            <div className="circle3"></div>
 
-            <div className='wrapper3'>
-                <p><span class="bold">VibeSync</span> <span class="about">About Us</span> <span class="contact">Contact</span> <span class="policy">Privacy Policy</span></p>
-                <div className = 'copyright'>
-                    <p>© 2024 VibeSync. All rights reserved.</p>
-                </div>
+            <div className='loginFooter'>
+                <Footer/>
             </div>
-
         </div>
     );
 };

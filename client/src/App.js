@@ -7,6 +7,7 @@ import SpotifyLogin from './components/SpotifyLogin';
 import Comparisons from './pages/Comparisons/Comparisons';
 import Results from './pages/Results/Results';
 import About from './pages/About/About';
+import AboutUs from './pages/AboutUs/AboutUs';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/comparisons" element={<Comparisons />} />
                 <Route path="/results" element={<Results />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
         </Router>
     );
