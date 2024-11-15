@@ -15,17 +15,16 @@ const About = () => {
         <p>
         Compare your favorite music today! By connecting to your Spotify account and using our custom algorithm, our site allows you to see how similar your tastes are to anyone you know. 
         </p>
-        <div className = 'image'></div>
       </div>  
 
       <div className='aboutBackgroundImage'>
-        <img src={require('../../assets/about_background.png')}/>
+        <img src={require('../../assets/about_background.jpg')} alt=''/>
       </div>
 
       <div className = 'aboutGridContainer'>
 
         <div className = 'aboutColumn1'>
-          <img src={require('../../assets/music_note.png')}/>
+          <img src={require('../../assets/music_note.png')} alt=''/>
           <div className = 'text'>
             <p>Compare your favorite Spotify playlists, albums, songs, genres, and more!</p>
           </div>
@@ -41,7 +40,7 @@ const About = () => {
         </div>
 
         <div className = 'aboutColumn3'>
-          <img src={require('../../assets/person.png')}/>
+          <img src={require('../../assets/person.png')} alt=''/>
           <div className = 'text'>
             <p>Make an account, link your Spotify account, and begin comparing with your friends!</p>
           </div>
