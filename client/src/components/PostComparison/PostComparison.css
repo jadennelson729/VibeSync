@@ -1,0 +1,121 @@
+.postcomp{
+    width: 100%;
+    min-height:90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+.postcomp-text{
+    text-align: center;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    margin: auto;
+}
+
+.postcomp-text h1{
+    margin-top: 100px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.postcomp-text h2{
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: -80px;
+}
+
+.postcomp-text h3{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.postcomp-text .percentage {
+    font-size: 80px;
+    font-weight: 600;
+    color: #1DB954;
+}
+
+.postcomp .bottomtext, .postcomp button {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .postcomp-buttons {
+    display: flex; 
+    gap: 100px; 
+    margin-top: 0px; 
+  }
+
+  .rectangle-container {
+    display: inline-flex;
+    gap: 300px; 
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; 
+    width: 100%;
+  }
+  
+  .rectangle {
+    width: 500px; 
+    height: 550px; 
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 40px;
+    border: 10px;
+    border-color: white;
+  }
+
+  .rectangle-green {
+    background-image: linear-gradient(to top, rgba(138, 77, 255, 50%), rgba(29, 185, 84, 100%));
+  }
+  
+  .rectangle-purple {
+    background-image: linear-gradient(to top, rgba(29, 185, 84, 50%), rgba(138, 77, 255, 100%));
+  }
+  .main-text {
+    font-size: 40px; 
+    color: #ffffff;
+    margin-top: 20px;
+  }
+  
+  .small-text {
+    font-size: 35px;
+    text-align: left; 
+    margin-left: 30px;
+    margin-top: 20px;
+    color: #ffffff;
+  }
+  
+  .smaller-text {
+    font-size: 20px;
+    text-align: left; 
+    color: #b0b0b0; 
+    margin-left: 60px;
+  }
+
+/* media query */
+
+@media (max-width: 850px) {
+    .postcomp-text h1{
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+    .postcomp-text h1{
+        font-size: 30px;
+        max-width: 400px;
+        margin: auto;
+    }
+    .postcomp-text h2{
+        font-size: 14px;
+        margin: 15px auto 30px;
+    }
+}

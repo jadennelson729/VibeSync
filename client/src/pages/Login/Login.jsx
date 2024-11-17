@@ -25,7 +25,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='loginPage'>
             <div className='wrapper1'>
                 <h1>VibeSync</h1>
             </div>

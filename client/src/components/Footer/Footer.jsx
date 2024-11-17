@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-scroll';
 import './Footer.css'
 
 const Footer = () => {
@@ -11,7 +10,6 @@ const Footer = () => {
         <p>© 2024 VibeSync. All rights reserved.</p>
         <ul>
             <li onClick={() => navigate('/aboutus')} >About Us</li>
-            <li><Link to='contact' smooth={true} offset={-245} duration={500}>Contact</Link></li>
             <li onClick={() => navigate('/privatepolicy')}>Privacy Policy</li>
         </ul>
     </div>

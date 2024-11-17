@@ -3,6 +3,7 @@
     font-size: 50px;
     margin-top: 200px;
     margin-bottom: 150px;
+    color: white;
 }
 
 .aboutUsBackgroundImage img {
@@ -20,6 +21,7 @@
     padding: 40px 40px 40px 40px;
     border: 2px solid rgb(15, 15, 15);
     margin-bottom: 150px;
+    color: white;
 }
 
 .aboutUsWrapper2 .whoWeAre h2{

@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from 'react'
-import './Navbar.css'
+import React, { useEffect, useState} from 'react';
+import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-scroll';
-import logo from '../../assets/VibeSync.png'
-import menu_icon from '../../assets/menu-icon.png'
+import { Link as ScrollLink } from 'react-scroll';
+import logo from '../../assets/VibeSync.png';
+import menu_icon from '../../assets/menu-icon.png';
 
 const Navbar = () => {
 
@@ -11,30 +11,40 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-      window.addEventListener('scroll', () =>{
-        window.scrollY > 50 ? setSticky(true) : setSticky(false);
-      })
+        window.addEventListener('scroll', () =>{
+          if (window.scrollY > 50) {
+            setSticky(true);
+          } else {
+            setSticky(false);
+          }
+        })
     },[])
 
     const [mobileMenu, setMobileMenu] = useState(false);
-    const toggleMenu = ()=>{
-        mobileMenu? setMobileMenu(false) : setMobileMenu(true);
+    const toggleMenu = ()=> {
+        mobileMenu ? setMobileMenu(false) : setMobileMenu(true);
     }
 
   return (
-    /* condition that checks whether the user has scrolled, if so make opaque */
-    <nav className={`container ${sticky? 'dark-nav' : ''}`}>
-      <img src= {logo} alt="" className='logo' />
-      <ul className={mobileMenu?'':'hide-mobile-menu'}>
-        <li onClick={() => navigate('/home')} > Home </li>
-        <li onClick={() => navigate('/comparisons')}> Compare </li>
-        <li onClick={() => navigate('/about')}> About </li>
-        <li> <Link to='contact' smooth={true} offset={-245} duration={500}>Contact</Link></li>
-        <li><button className='btn' onClick={() => navigate('/login')}>Login/Signup</button> </li>
-      </ul>
-      <img src={menu_icon} alt="" className='menu_icon' onClick={toggleMenu}/>
+    <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
+        <img src={logo} alt="Logo" className="logo" />
+        <ul className={mobileMenu ? '' : 'hide-mobile-menu'}>
+            <li onClick={() => navigate('/home')} > Home </li>
+            <li onClick={() => navigate('/comparisons')}> Compare </li>
+            <li onClick={() => navigate('/about')}> About </li>
+            {/* Special: Switches to home page then scrolls to the contact section */}
+            <li>
+                <ScrollLink to="contact" smooth={true} offset={-100} duration={500} onClick={() => navigate('/home')}>
+                    Contact
+                </ScrollLink>
+            </li>
+            <li>
+                <button className="btn" onClick={() => navigate('/login')}>Login/Signup</button>
+            </li>
+        </ul>
+        <img src={menu_icon} alt="Menu Icon" className="menu_icon" onClick={toggleMenu} />
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

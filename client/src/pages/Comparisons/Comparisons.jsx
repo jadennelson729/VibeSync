@@ -1,8 +1,35 @@
+import React from 'react';
+import './Comparisons.css';
+import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
+import PreComparison from '../../components/PreComparison/PreComparison';
+
+const Comparisons = () => {
+
+  return (
+    <div className='precompPage'>
+        <Navbar/>    
+        <PreComparison/>
+        <div className="aboutCircle1"></div>
+        <div className="aboutCircle2"></div>  
+        <Footer/>
+
+    </div>
+  )
+}
+
+export default Comparisons
+
+/* here is your old code @Trevor*/
+/*
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-js';
 import './Comparisons.css';
+import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
+
 const spotifyApi = new SpotifyWebApi();
 
 const getTokenFromUrl = () => {
@@ -112,59 +139,62 @@ const Comparisons = () => {
         }
     };
 
-    return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            {loggedIn && (
-                <div style={{ width: '45%' }}>
-                    <h3>Current User</h3>
-                    {currentUserInfo && (
+    return ( 
+    <div>      
+            <div className="ComparisonLogic" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                {loggedIn && (
+                    <div style={{ width: '45%' }}>
+                        <h3>Current User</h3>
+                        {currentUserInfo && (
+                            <div>
+                                <p>Username: {currentUserInfo.username}</p>
+                                <p>Spotify Display Name: {currentUserInfo.spotifyDisplayName}</p>
+                            </div>
+                        )}
                         <div>
-                            <p>Username: {currentUserInfo.username}</p>
-                            <p>Spotify Display Name: {currentUserInfo.spotifyDisplayName}</p>
+                            <h4>Your Playlists:</h4>
+                            <div>
+                                <select onChange={handleCurrentPlaylistChange}>
+                                    {currentUserPlaylists.map(playlist => (
+                                        <option key={playlist.id} value={playlist.id}>{playlist.name}</option>
+                                    ))}
+                                </select>
+                                {currentPlaylistImage && <img src={currentPlaylistImage} alt="Playlist" style={{ height: 150, margin: '20px 0 0 0' }} />}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <div style={{ width: '45%' }}>
+                    <h3>Other User</h3>
+                    <div>
+                        <input type="text" placeholder="VibeSync Username" id="vibesyncUsername" />
+                        <button onClick={() => fetchOtherUserPlaylists(document.getElementById('vibesyncUsername').value)}>Get Playlists</button>
+                    </div>
+                    {otherUserInfo && (
+                        <div>
+                            <p>Username: {otherUserInfo.username}</p>
+                            <p>Spotify Display Name: {otherUserInfo.spotifyDisplayName}</p>
                         </div>
                     )}
                     <div>
-                        <h4>Your Playlists:</h4>
+                        <h4>Other User's Playlists:</h4>
                         <div>
-                            <select onChange={handleCurrentPlaylistChange}>
-                                {currentUserPlaylists.map(playlist => (
+                            <select onChange={handleOtherPlaylistChange}>
+                                {otherUserPlaylists.map(playlist => (
                                     <option key={playlist.id} value={playlist.id}>{playlist.name}</option>
                                 ))}
                             </select>
-                            {currentPlaylistImage && <img src={currentPlaylistImage} alt="Playlist" style={{ height: 150, margin: '20px 0 0 0' }} />}
+                            {otherPlaylistImage && <img src={otherPlaylistImage} alt="Playlist" style={{ height: 150, margin: '20px 0 0 0' }} />}
                         </div>
                     </div>
                 </div>
-            )}
-            <div style={{ width: '45%' }}>
-                <h3>Other User</h3>
-                <div>
-                    <input type="text" placeholder="VibeSync Username" id="vibesyncUsername" />
-                    <button onClick={() => fetchOtherUserPlaylists(document.getElementById('vibesyncUsername').value)}>Get Playlists</button>
+                <div style={{ width: '100%', textAlign: 'center', marginTop: '20px' }}>
+                    <button onClick={handleCompare}>Compare Playlists</button>
                 </div>
-                {otherUserInfo && (
-                    <div>
-                        <p>Username: {otherUserInfo.username}</p>
-                        <p>Spotify Display Name: {otherUserInfo.spotifyDisplayName}</p>
-                    </div>
-                )}
-                <div>
-                    <h4>Other User's Playlists:</h4>
-                    <div>
-                        <select onChange={handleOtherPlaylistChange}>
-                            {otherUserPlaylists.map(playlist => (
-                                <option key={playlist.id} value={playlist.id}>{playlist.name}</option>
-                            ))}
-                        </select>
-                        {otherPlaylistImage && <img src={otherPlaylistImage} alt="Playlist" style={{ height: 150, margin: '20px 0 0 0' }} />}
-                    </div>
-                </div>
-            </div>
-            <div style={{ width: '100%', textAlign: 'center', marginTop: '20px' }}>
-                <button onClick={handleCompare}>Compare Playlists</button>
-            </div>
-        </div>
+            </div>                      
+    </div>
     );
 };
 
 export default Comparisons;
+*/

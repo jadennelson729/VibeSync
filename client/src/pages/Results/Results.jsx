@@ -1,5 +1,29 @@
+import React from 'react'
+import './Results.css';
+import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
+import PostComparison from '../../components/PostComparison/PostComparison'
+
+const Results = () => {
+  return (
+    <div className='postcompPage'>
+        <Navbar/>
+        <PostComparison/>
+        <div className="aboutCircle1"></div>
+        <div className="aboutCircle2"></div>
+        <Footer/>
+    </div>
+  )
+}
+
+export default Results;
+
+/* Here's your old code @Trevor, most of the logic is implemented in PostComparison
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import './Results.css';
+import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
 import axios from 'axios';
 
 const Results = () => {
@@ -27,6 +51,8 @@ const Results = () => {
     }, [currentPlaylist, otherPlaylist, currentUser, otherUser]);
 
     return (
+
+
         <div>
             <h2>Comparison Results</h2>
             <p>Current Playlist ID: {currentPlaylist}</p>
@@ -37,3 +63,4 @@ const Results = () => {
 };
 
 export default Results;
+*/

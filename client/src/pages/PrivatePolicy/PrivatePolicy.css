@@ -9,6 +9,7 @@
     padding-top: 40px;
     padding-bottom: 40px;
     border: 5px solid rgb(15, 15, 15);
+    color: white;
 }
 
 .privatePolicyWrapper2 {
@@ -18,18 +19,22 @@
     border: 5px solid rgb(15, 15, 15);
     padding: 40px 40px 40px 40px;
     min-width: 500px;
+    color: white;
 }
 
 .privatePolicyWrapper2 h2 {
     margin-top: 20px;
     font-size: 36px;
+    color: white;
 }
 
 .privatePolicyWrapper2 h3 {
     margin-top: 20px;
     font-size: 24px;
+    color: white;
 }
 
 .privatePolicyWrapper2 p {
     margin-top: 20px;
+    color: white;
 }

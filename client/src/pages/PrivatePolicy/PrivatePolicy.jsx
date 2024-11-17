@@ -9,7 +9,7 @@ const PrivatePolicy = () => {
       <Navbar/>
 
       <div className='privatePolicyWrapper1'>
-        <h1>Private Policy</h1>
+        <h1>Privacy Policy</h1>
       </div>
 
       <div className='privatePolicyWrapper2'>
