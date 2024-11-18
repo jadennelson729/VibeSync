@@ -9,8 +9,8 @@ const Footer = () => {
     <div className='footer'>
         <p>© 2024 VibeSync. All rights reserved.</p>
         <ul>
-            <li onClick={() => navigate('/aboutus')} >About Us</li>
-            <li onClick={() => navigate('/privatepolicy')}>Privacy Policy</li>
+            <li onClick={() => navigate('/about-us')} >About Us</li>
+            <li onClick={() => navigate('/privacy-policy')}>Privacy Policy</li>
         </ul>
     </div>
   )

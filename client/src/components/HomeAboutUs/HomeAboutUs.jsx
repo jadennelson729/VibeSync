@@ -11,7 +11,7 @@ const HomeAboutUs = () => {
         <h2> Want to know more about the team? </h2>
         <p> Learn more about the minds behind VibeSync and how it started!
         </p>
-        <button className='altbtn' onClick={() => navigate('/aboutus')} > Learn More </button> 
+        <button className='altbtn' onClick={() => navigate('/about-us')} > Learn More </button>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import Footer from '../../components/Footer/Footer'
+import Navbar from "../../components/Navbar/Navbar";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -14,7 +15,7 @@ const Login = () => {
         try {
             await axios.post(url, { username, password });
             if (isLogin) {
-                document.cookie = `username=${username}; path=/`; // Store username in cookies
+                localStorage.setItem('username', username); // Store username in local storage
                 window.location.href = 'http://localhost:8888'; // Redirect to Spotify login page
             } else {
                 alert('User registered successfully');
@@ -26,10 +27,7 @@ const Login = () => {
 
     return (
         <div className='loginPage'>
-            <div className='wrapper1'>
-                <h1>VibeSync</h1>
-            </div>
-
+            <Navbar/>
             <div className='wrapper2'>
                 <h1>{isLogin ? 'Login' : 'Signup'}</h1>
                 <form onSubmit={handleSubmit}>

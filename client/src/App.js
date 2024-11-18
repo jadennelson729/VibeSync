@@ -8,7 +8,7 @@ import Comparisons from './pages/Comparisons/Comparisons';
 import Results from './pages/Results/Results';
 import About from './pages/About/About';
 import AboutUs from './pages/AboutUs/AboutUs';
-import PrivatePolicy from './pages/PrivatePolicy/PrivatePolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
     return (
@@ -22,8 +22,8 @@ function App() {
                 <Route path="/comparisons" element={<Comparisons />} />
                 <Route path="/results" element={<Results />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/aboutus" element={<AboutUs />} />
-                <Route path="/privatepolicy" element={<PrivatePolicy />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
         </Router>
     );

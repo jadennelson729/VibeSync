@@ -1,9 +1,9 @@
 import React from 'react'
-import './PrivatePolicy.css'
+import './PrivacyPolicy.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 
-const PrivatePolicy = () => {
+const PrivacyPolicy = () => {
   return (
     <div>
       <Navbar/>
@@ -38,4 +38,4 @@ const PrivatePolicy = () => {
   )
 }
 
-export default PrivatePolicy
+export default PrivacyPolicy
