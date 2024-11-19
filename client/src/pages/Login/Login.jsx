@@ -15,6 +15,7 @@ const Login = () => {
         try {
             await axios.post(url, { username, password });
             if (isLogin) {
+                document.cookie = `username=${username}; path=/`; // Store username in cookies
                 localStorage.setItem('username', username); // Store username in local storage
                 window.location.href = 'http://localhost:8888'; // Redirect to Spotify login page
             } else {
