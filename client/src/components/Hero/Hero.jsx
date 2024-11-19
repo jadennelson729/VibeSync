@@ -19,7 +19,7 @@ const Hero = () => {
     <div className='hero container'>
       <div className="hero-text">
         <h1> Compare music with your friends! </h1>
-        <p> Discover your music match—compare Spotify 
+        <p> Discover your music match. Compare Spotify
             playlists and see who's in tune with you! </p>
           <button className='btn' onClick={handleStartComparing}> Start Comparing <img src={dark_arrow} alt=""/></button>
       </div>

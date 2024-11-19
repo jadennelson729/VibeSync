@@ -16,6 +16,7 @@ const vibeAuth = require('./routes/vibeAuth')
 const User = require("./models/user");
 const getUserPlaylists = require('./routes/getUserPlaylists');
 const comparePlaylists = require('./routes/comparePlaylists');
+const getUserTopItems = require('./routes/getUserTopItems');
 require("dotenv").config();
 
 app.use(express.static(__dirname + '/public'));
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use('/vibeAuth', vibeAuth);
 app.use('/getUserPlaylists', getUserPlaylists);
 app.use('/comparePlaylists', comparePlaylists);
+app.use('/getUserTopItems', getUserTopItems);
 
 connectDB(); // Connect to MongoDB
 
@@ -37,7 +39,7 @@ app.get('/login', function(req, res) { // Login route to initiate an authorizati
   const state = crypto.randomBytes(60).toString('hex').slice(0, 16);
   res.cookie(stateKey, state);
 
-  const scope = 'user-read-private user-read-email user-read-playback-state playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
+  const scope = 'user-top-read user-read-private user-read-email user-read-playback-state playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
