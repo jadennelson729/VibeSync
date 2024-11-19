@@ -1,6 +1,18 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './PostComparison.css'
+import { useSpring, animated } from 'react-spring'
+
+const AnimatedPercentage = ({ value }) => {
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: value,
+    delay: 200,
+    config: { mass: 1, tension: 20, friction: 10 },
+  });
+
+  return <animated.span>{number.to((n) => n.toFixed(0))}</animated.span>;
+};
 
 const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs }) => {
   const navigate = useNavigate();
@@ -11,11 +23,13 @@ const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs 
           <h1> Here are your comparison results: </h1>
           {/* Replace 67% with real percentage below*/}
           <h2> Your music taste is </h2>
-          <h1 className='percentage'> 67% </h1>
+          <h1 className='percentage'>
+            <AnimatedPercentage value={67}/>%
+          </h1>
           <h2 className='bottomtext'> similar to {otherUsername}! </h2>
           <div className='postcomp-buttons'>
-            <button className='btn' onClick={() => navigate('/comparisons')}> Compare Again </button>
-            <button className='altbtn' onClick={() => navigate('/home')}> Back to Home </button>
+            <button className='btn' onClick={() => navigate('/comparisons')}> Compare Again</button>
+            <button className='altbtn' onClick={() => navigate('/home')}> Back to Home</button>
           </div>
           <h3> Other stats: </h3>
           <div className="rectangle-container">
