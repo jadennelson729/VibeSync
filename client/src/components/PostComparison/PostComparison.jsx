@@ -23,7 +23,7 @@ const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs,
           <h1> Here are your comparison results: </h1>
           <h2> Your music taste is </h2>
           <h1 className='percentage'>
-            <AnimatedPercentage value={similarityPercentage}/>%
+            <AnimatedPercentage value={parseFloat(similarityPercentage)} />
           </h1>
           <h2 className='bottomtext'> similar to {otherUsername}! </h2>
           <div className='postcomp-buttons'>
