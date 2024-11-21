@@ -4,7 +4,6 @@ const User = require('../models/user.js');
 
 const router = express.Router();
 
-// Register route
 router.post('/register', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -21,7 +20,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login route
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -38,6 +36,20 @@ router.post('/login', async (req, res) => {
         }
     } catch (error) {
         res.status(500).send('Error logging in: ' + error.message);
+    }
+});
+
+router.get('/userProfile/:username', async (req, res) => {
+    const { username } = req.params;
+    try {
+        const user = await User.findOne({ username }, 'profileImage');
+        if (user) {
+            res.json({ profileImage: user.profileImage });
+        } else {
+            res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send('Error fetching user profile: ' + error.message);
     }
 });
 

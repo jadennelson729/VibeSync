@@ -10,6 +10,7 @@ const Results = () => {
     const [currentUserTopSongs, setCurrentUserTopSongs] = useState([]);
     const [otherUserTopSongs, setOtherUserTopSongs] = useState([]);
     const [otherUsername, setOtherUsername] = useState('');
+    const [similarityPercentage, setSimilarityPercentage] = useState(0);
     const location = useLocation();
 
     useEffect(() => {
@@ -28,8 +29,11 @@ const Results = () => {
 
                 setCurrentUserTopSongs(currentUserResponse.data.topSongs);
                 setOtherUserTopSongs(otherUserResponse.data.topSongs);
+
+                const similarityResponse = await axios.get(`http://localhost:8888/comparePlaylists/saved-tracks?user1=${currentUser}&user2=${otherUser}`);
+                setSimilarityPercentage(similarityResponse.data.similarity);
             } catch (error) {
-                console.error('Error fetching top songs:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
@@ -43,6 +47,7 @@ const Results = () => {
                 otherUsername={otherUsername}
                 currentUserTopSongs={currentUserTopSongs}
                 otherUserTopSongs={otherUserTopSongs}
+                similarityPercentage={similarityPercentage}
             />
             <div className="aboutCircle1"></div>
             <div className="aboutCircle2"></div>

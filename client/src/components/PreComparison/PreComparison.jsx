@@ -21,9 +21,9 @@ const PreComparison = () => {
 
     const fetchUserProfile = async (username) => {
         try {
-            const response = await axios.get(`http://localhost:8888/getUserPlaylists/playlists/${username}`);
-            if (response.data.user && response.data.user.profileImage) {
-                setProfileImage(response.data.user.profileImage);
+            const response = await axios.get(`http://localhost:8888/vibeAuth/userProfile/${username}`);
+            if (response.data && response.data.profileImage) {
+                setProfileImage(response.data.profileImage);
             }
         } catch (error) {
             console.error('Error fetching user profile:', error);

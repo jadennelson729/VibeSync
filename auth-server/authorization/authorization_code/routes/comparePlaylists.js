@@ -24,14 +24,16 @@ const refreshSpotifyToken = async (refreshToken) => {
     }
 };
 
-const getSpotifyPlaylists = async (accessToken, refreshToken, userId, playlistId) => {
+const getSpotifyPlaylistTracks = async (accessToken, refreshToken, userId, playlistId) => {
     try {
         const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
             headers: { 'Authorization': 'Bearer ' + accessToken }
         });
         return response.data.items.map(item => ({
-            trackId: item.track.id,
-            artistId: item.track.artists[0].id
+            name: item.track.name,
+            id: item.track.id,
+            artist: item.track.artists[0].name,
+            genre: item.track.artists[0].genres[0]
         }));
     } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -44,6 +46,15 @@ const getSpotifyPlaylists = async (accessToken, refreshToken, userId, playlistId
     }
 };
 
+function calculateSimilarity(tracks1, tracks2) { // Temporary function that calculates track similarity
+    const set1 = new Set(tracks1.map(t => t.id));
+    const set2 = new Set(tracks2.map(t => t.id));
+    const intersection = new Set([...set1].filter(x => set2.has(x)));
+    const union = new Set([...set1, ...set2]);
+    return (intersection.size / union.size) * 100;
+}
+
+//// TODO:: Fix and implement Genre similarity calculation
 const getArtistGenres = async (accessToken, artistIds) => {
     try {
         const artistData = await axios.get(`https://api.spotify.com/v1/artists?ids=${artistIds.join(',')}`, {
@@ -60,6 +71,7 @@ const getArtistGenres = async (accessToken, artistIds) => {
     }
 };
 
+//// TODO:: Fix and implement Genre similarity calculation
 const calculateGenreSimilarity = (genreCount1, genreCount2, topGenres) => {
     const totalTracks1 = Object.values(genreCount1).reduce((a, b) => a + b, 0);
     const totalTracks2 = Object.values(genreCount2).reduce((a, b) => a + b, 0);
@@ -77,43 +89,51 @@ const calculateGenreSimilarity = (genreCount1, genreCount2, topGenres) => {
 };
 
 router.get('/', async (req, res) => {
-    const { playlist1, playlist2, currentUser, otherUser } = req.query;
+    const { playlist1, playlist2, user1, user2 } = req.query;
 
     try {
-        const currentUserData = await User.findOne({ username: currentUser });
-        const otherUserData = await User.findOne({ username: otherUser });
+        const user1Data = await User.findOne({ username: user1 });
+        const user2Data = await User.findOne({ username: user2 });
 
-        if (!currentUserData || !otherUserData) {
-            console.error('User not found');
-            return res.status(404).json({ error: 'User not found' });
+        if (!user1Data || !user2Data) {
+            return res.status(404).json({ error: 'One or both users not found' });
         }
 
         const [tracks1, tracks2] = await Promise.all([
-            getSpotifyPlaylists(currentUserData.spotifyAccessToken, currentUserData.spotifyRefreshToken, currentUserData._id, playlist1),
-            getSpotifyPlaylists(otherUserData.spotifyAccessToken, otherUserData.spotifyRefreshToken, otherUserData._id, playlist2)
+            getSpotifyPlaylistTracks(user1Data.spotifyAccessToken, user1Data.spotifyRefreshToken, user1Data._id, playlist1),
+            getSpotifyPlaylistTracks(user2Data.spotifyAccessToken, user2Data.spotifyRefreshToken, user2Data._id, playlist2)
         ]);
 
-        const artistIds1 = [...new Set(tracks1.map(track => track.artistId))];
-        const artistIds2 = [...new Set(tracks2.map(track => track.artistId))];
+        const similarity = calculateSimilarity(tracks1, tracks2);
 
-        const genreCount1 = await getArtistGenres(currentUserData.spotifyAccessToken, artistIds1);
-        const genreCount2 = await getArtistGenres(otherUserData.spotifyAccessToken, artistIds2);
-
-        const combinedGenres = Object.keys(genreCount1).concat(Object.keys(genreCount2));
-        
-        // Calculate the number of top genres to consider as 1/4 of the total number of tracks in both playlists
-        const totalTracks = tracks1.length + tracks2.length;
-        const numTopGenres = Math.ceil(totalTracks / 4);
-
-        const topGenres = [...new Set(combinedGenres)]
-            .sort((a, b) => (genreCount1[b] || 0) + (genreCount2[b] || 0) - (genreCount1[a] || 0) - (genreCount2[a] || 0))
-            .slice(0, numTopGenres);
-
-        const genreSimilarity = calculateGenreSimilarity(genreCount1, genreCount2, topGenres);
-
-        res.json({ similarity: genreSimilarity.toFixed(2) });
+        res.json({ similarity: similarity.toFixed(2) });
     } catch (error) {
         console.error('Error comparing playlists:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/saved-tracks', async (req, res) => {
+    const { user1, user2 } = req.query;
+
+    try {
+        const user1Data = await User.findOne({ username: user1 });
+        const user2Data = await User.findOne({ username: user2 });
+
+        if (!user1Data || !user2Data) {
+            return res.status(404).json({ error: 'One or both users not found' });
+        }
+
+        const [tracks1, tracks2] = await Promise.all([
+            axios.get(`http://localhost:8888/getUserPlaylists/saved-tracks/${user1}`),
+            axios.get(`http://localhost:8888/getUserPlaylists/saved-tracks/${user2}`)
+        ]);
+
+        const similarity = calculateSimilarity(tracks1, tracks2);
+
+        res.json({ similarity: similarity.toFixed(2) });
+    } catch (error) {
+        console.error('Error comparing saved tracks:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

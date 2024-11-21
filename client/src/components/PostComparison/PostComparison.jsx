@@ -14,17 +14,16 @@ const AnimatedPercentage = ({ value }) => {
   return <animated.span>{number.to((n) => n.toFixed(0))}</animated.span>;
 };
 
-const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs }) => {
+const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs, similarityPercentage }) => {
   const navigate = useNavigate();
 
   return (
       <div className='postcomp container'>
         <div className="postcomp-text">
           <h1> Here are your comparison results: </h1>
-          {/* Replace 67% with real percentage below*/}
           <h2> Your music taste is </h2>
           <h1 className='percentage'>
-            <AnimatedPercentage value={67}/>%
+            <AnimatedPercentage value={similarityPercentage}/>%
           </h1>
           <h2 className='bottomtext'> similar to {otherUsername}! </h2>
           <div className='postcomp-buttons'>

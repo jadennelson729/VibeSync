@@ -39,7 +39,7 @@ app.get('/login', function(req, res) { // Login route to initiate an authorizati
   const state = crypto.randomBytes(60).toString('hex').slice(0, 16);
   res.cookie(stateKey, state);
 
-  const scope = 'user-top-read user-read-private user-read-email user-read-playback-state playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
+  const scope = 'user-top-read user-library-read user-read-private user-read-email user-read-playback-state playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
