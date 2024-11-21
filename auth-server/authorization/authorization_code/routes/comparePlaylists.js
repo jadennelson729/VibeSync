@@ -46,30 +46,25 @@ const getSpotifyPlaylistTracks = async (accessToken, refreshToken, userId, playl
     }
 };
 
-function calculateSimilarity(tracks1, tracks2) { // Temporary function that calculates track similarity
+function calculateSimilarity(tracks1, tracks2) {
+    if (!Array.isArray(tracks1) || !Array.isArray(tracks2)) {
+        console.error('Invalid input to calculateSimilarity:', { tracks1, tracks2 });
+        return 0;
+    }
+
     const set1 = new Set(tracks1.map(t => t.id));
     const set2 = new Set(tracks2.map(t => t.id));
     const intersection = new Set([...set1].filter(x => set2.has(x)));
-    const union = new Set([...set1, ...set2]);
-    return (intersection.size / union.size) * 100;
-}
 
-//// TODO:: Fix and implement Genre similarity calculation
-const getArtistGenres = async (accessToken, artistIds) => {
-    try {
-        const artistData = await axios.get(`https://api.spotify.com/v1/artists?ids=${artistIds.join(',')}`, {
-            headers: { 'Authorization': 'Bearer ' + accessToken }
-        });
-        return artistData.data.artists.reduce((acc, artist) => {
-            artist.genres.forEach(genre => {
-                acc[genre] = (acc[genre] || 0) + 1;
-            });
-            return acc;
-        }, {});
-    } catch (error) {
-        throw new Error('Error fetching artist genres: ' + error.message);
-    }
-};
+    const genreSet1 = new Set(tracks1.map(t => t.genre).filter(g => g !== 'Unknown Genre'));
+    const genreSet2 = new Set(tracks2.map(t => t.genre).filter(g => g !== 'Unknown Genre'));
+    const genreIntersection = new Set([...genreSet1].filter(x => genreSet2.has(x)));
+
+    const trackSimilarity = intersection.size / Math.max(set1.size, set2.size);
+    const genreSimilarity = genreIntersection.size / Math.max(genreSet1.size, genreSet2.size);
+
+    return (trackSimilarity * 0.7 + genreSimilarity * 0.3) * 100;
+}
 
 //// TODO:: Fix and implement Genre similarity calculation
 const calculateGenreSimilarity = (genreCount1, genreCount2, topGenres) => {
@@ -124,18 +119,26 @@ router.get('/saved-tracks', async (req, res) => {
             return res.status(404).json({ error: 'One or both users not found' });
         }
 
-        const [tracks1, tracks2] = await Promise.all([
+        const [tracks1Response, tracks2Response] = await Promise.all([
             axios.get(`http://localhost:8888/getUserPlaylists/saved-tracks/${user1}`),
             axios.get(`http://localhost:8888/getUserPlaylists/saved-tracks/${user2}`)
         ]);
+        const tracks1 = tracks1Response.data.savedTracks;
+        const tracks2 = tracks2Response.data.savedTracks;
+
+        console.log('Tracks1:', tracks1); //// TODO:: Remove when working correctly
+        console.log('Tracks2:', tracks2);
+
+        if (!Array.isArray(tracks1) || !Array.isArray(tracks2)) {
+            throw new Error('Invalid tracks data received');
+        }
 
         const similarity = calculateSimilarity(tracks1, tracks2);
 
         res.json({ similarity: similarity.toFixed(2) });
     } catch (error) {
         console.error('Error comparing saved tracks:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 });
-
 module.exports = router;

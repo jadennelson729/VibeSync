@@ -48,20 +48,48 @@ const getSpotifyPlaylists = async (accessToken, refreshToken, userId) => {
 const getSpotifySavedTracks = async (accessToken, refreshToken, userId) => {
     try {
         const response = await axios.get('https://api.spotify.com/v1/me/tracks', {
-            headers: { 'Authorization': 'Bearer ' + accessToken }
+            headers: { 'Authorization': 'Bearer ' + accessToken },
+            params: { limit: 50 }  // Limit to 50 tracks
         });
-        return response.data.items.map(item => ({
-            name: item.track.name,
-            id: item.track.id,
-            artist: item.track.artists[0].name,
-            genre: item.track.artists[0].genres[0]
-        }));
+
+        if (!response.data || !response.data.items) {
+            throw new Error('Unexpected response from Spotify API');
+        }
+
+        const artistIds = [...new Set(response.data.items.flatMap(item =>
+            item.track.artists.map(artist => artist.id)
+        ))];
+
+        const artistsResponse = await axios.get(`https://api.spotify.com/v1/artists`, { // Fetch artist details
+            headers: { 'Authorization': 'Bearer ' + accessToken },
+            params: { ids: artistIds.join(',') }
+        });
+
+        const artistGenres = artistsResponse.data.artists.reduce((acc, artist) => { // Map artist ID to genres
+            acc[artist.id] = artist.genres;
+            return acc;
+        }, {});
+
+        return response.data.items.map(item => {
+            if (!item || !item.track) return null;
+
+            const mainArtist = item.track.artists[0];
+            const genres = artistGenres[mainArtist.id] || [];
+
+            return {
+                name: item.track.name || 'Unknown Track',
+                id: item.track.id || 'Unknown ID',
+                artist: mainArtist.name || 'Unknown Artist',
+                genre: genres[0] || 'Unknown Genre' // Use the first genre if available
+            };
+        }).filter(track => track !== null);
     } catch (error) {
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
             const newAccessToken = await refreshSpotifyToken(refreshToken);
             await User.findByIdAndUpdate(userId, { spotifyAccessToken: newAccessToken });
             return getSpotifySavedTracks(newAccessToken, refreshToken, userId);
         } else {
+            console.error('Error in getSpotifySavedTracks:', error);
             throw new Error('Error fetching Spotify saved tracks: ' + error.message);
         }
     }
