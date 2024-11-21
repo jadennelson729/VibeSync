@@ -57,14 +57,14 @@
     display: inline-flex;
     gap: 300px; 
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     margin-top: 20px; 
     width: 100%;
   }
   
   .rectangle {
     width: 500px; 
-    height: 750px; 
+    height: auto; 
     margin-top: 40px;
     margin-bottom: 40px;
     border-radius: 40px;
@@ -98,6 +98,14 @@
     text-align: left; 
     color: #b0b0b0; 
     margin-left: 60px;
+    margin-bottom: 20px;
+  }
+
+ .postcomp-text .categ-header {
+    font-size: 40px; 
+    color: #1DB954;
+    margin-top: 20px;
+    margin-bottom: 5px;
   }
 
 /* media query */

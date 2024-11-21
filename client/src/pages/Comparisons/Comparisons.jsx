@@ -20,8 +20,8 @@ const Comparisons = () => {
 
 export default Comparisons
 
-/* here is your old code @Trevor*/
-/*
+/* here is your old code @Trevor, most of the logic is implemented in PreComparison */
+/* 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

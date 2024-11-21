@@ -31,6 +31,7 @@ const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs,
             <button className='altbtn' onClick={() => navigate('/home')}> Back to Home</button>
           </div>
           <h3> Other stats: </h3>
+          <h2 className = "categ-header"> Top 5 Songs </h2>
           <div className="rectangle-container">
             <div className="rectangle rectangle-green">
               <p className="main-text">Top 5 Songs (You)</p>
@@ -51,6 +52,51 @@ const PostComparison = ({ otherUsername, currentUserTopSongs, otherUserTopSongs,
               ))}
             </div>
           </div>
+            
+          <h2 className = "categ-header"> Top 5 Artists </h2>
+          <div className="rectangle-container">
+            <div className="rectangle rectangle-green">
+              <p className="main-text">Top 5 Artists (You)</p>
+              {currentUserTopSongs.map((song, index) => (
+                  <React.Fragment key={index}>
+                    <p className="small-text">{index + 1}. {song.name}</p>
+                    <p className="smaller-text">{song.artist}</p>
+                  </React.Fragment>
+              ))}
+            </div>
+            <div className="rectangle rectangle-purple">
+              <p className="main-text">Top 5 Artists ({otherUsername})</p>
+              {otherUserTopSongs.map((song, index) => (
+                  <React.Fragment key={index}>
+                    <p className="small-text">{index + 1}. {song.name}</p>
+                    <p className="smaller-text">{song.artist}</p>
+                  </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          <h2 className = "categ-header"> Top 5 Genres </h2>
+          <div className="rectangle-container">
+            <div className="rectangle rectangle-green">
+              <p className="main-text">Top 5 Genres (You)</p>
+              {currentUserTopSongs.map((song, index) => (
+                  <React.Fragment key={index}>
+                    <p className="small-text">{index + 1}. {song.name}</p>
+                    <p className="smaller-text">{song.artist}</p>
+                  </React.Fragment>
+              ))}
+            </div>
+            <div className="rectangle rectangle-purple">
+              <p className="main-text">Top 5 Genres ({otherUsername})</p>
+              {otherUserTopSongs.map((song, index) => (
+                  <React.Fragment key={index}>
+                    <p className="small-text">{index + 1}. {song.name}</p>
+                    <p className="smaller-text">{song.artist}</p>
+                  </React.Fragment>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
   )
