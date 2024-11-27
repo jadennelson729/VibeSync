@@ -33,54 +33,71 @@ const getSpotifyPlaylistTracks = async (accessToken, refreshToken, userId, playl
             name: item.track.name,
             id: item.track.id,
             artist: item.track.artists[0].name,
-            genre: item.track.artists[0].genres[0]
+            genre: item.track.artists[0].genres[0] || 'Unknown Genre'
         }));
     } catch (error) {
         if (error.response && error.response.status === 401) {
             const newAccessToken = await refreshSpotifyToken(refreshToken);
             await User.findByIdAndUpdate(userId, { spotifyAccessToken: newAccessToken });
-            return getSpotifyPlaylists(newAccessToken, refreshToken, userId, playlistId);
+            return getSpotifyPlaylistTracks(newAccessToken, refreshToken, userId, playlistId);
         } else {
             throw new Error('Error fetching Spotify playlists: ' + error.message);
         }
     }
 };
 
-function calculateSimilarity(tracks1, tracks2) {
-    if (!Array.isArray(tracks1) || !Array.isArray(tracks2)) {
-        console.error('Invalid input to calculateSimilarity:', { tracks1, tracks2 });
-        return 0;
-    }
-
-    const set1 = new Set(tracks1.map(t => t.id));
-    const set2 = new Set(tracks2.map(t => t.id));
-    const intersection = new Set([...set1].filter(x => set2.has(x)));
-
-    const genreSet1 = new Set(tracks1.map(t => t.genre).filter(g => g !== 'Unknown Genre'));
-    const genreSet2 = new Set(tracks2.map(t => t.genre).filter(g => g !== 'Unknown Genre'));
-    const genreIntersection = new Set([...genreSet1].filter(x => genreSet2.has(x)));
-
-    const trackSimilarity = intersection.size / Math.max(set1.size, set2.size);
-    const genreSimilarity = genreIntersection.size / Math.max(genreSet1.size, genreSet2.size);
-
-    return (trackSimilarity * 0.7 + genreSimilarity * 0.3) * 100;
-}
-
-//// TODO:: Fix and implement Genre similarity calculation
 const calculateGenreSimilarity = (genreCount1, genreCount2, topGenres) => {
     const totalTracks1 = Object.values(genreCount1).reduce((a, b) => a + b, 0);
     const totalTracks2 = Object.values(genreCount2).reduce((a, b) => a + b, 0);
 
     let similaritySum = 0;
 
-    topGenres.forEach(genre => {
-        const percentage1 = (genreCount1[genre] || 0) / totalTracks1;
-        const percentage2 = (genreCount2[genre] || 0) / totalTracks2;
-        const genreDifference = Math.abs(percentage1 - percentage2);
-        similaritySum += (1 - genreDifference);
+    // Ensure topGenres is an array before calling forEach
+    if (Array.isArray(topGenres)) {
+        topGenres.forEach(genre => {
+            const percentage1 = (genreCount1[genre] || 0) / totalTracks1;
+            const percentage2 = (genreCount2[genre] || 0) / totalTracks2;
+            const genreDifference = Math.abs(percentage1 - percentage2);
+            similaritySum += (1 - genreDifference);  // Calculate similarity based on the absolute difference
+        });
+    } else {
+        console.error('topGenres is not an array:', topGenres);
+        return 0;  // Handle invalid topGenres as needed
+    }
+
+    // Return the average similarity for all genres
+    return (similaritySum / topGenres.length) * 100;
+};
+
+const calculateGenrePercentages = (tracks) => {
+    const genreKeywords = {
+        pop: ['pop'],
+        rap: ['rap'],
+        rock: ['rock'],
+        latino: ['latino'],
+        'hip hop': ['hip hop'],
+        house: ['house'],
+        rnb: ['r&b'],
+        jazz: ['jazz'],
+        motown: ['motown'],
+        country: ['country']
+    };
+
+    const genreCounts = Object.keys(genreKeywords).reduce((acc, genre) => {
+        acc[genre] = 0;
+        return acc;
+    }, {});
+
+    tracks.forEach(track => {
+        const genre = track.genre.toLowerCase();
+        Object.keys(genreKeywords).forEach(genreKey => {
+            if (genreKeywords[genreKey].some(keyword => genre.includes(keyword))) {
+                genreCounts[genreKey]++;
+            }
+        });
     });
 
-    return (similaritySum / topGenres.length) * 100;
+    return genreCounts;
 };
 
 router.get('/', async (req, res) => {
@@ -99,9 +116,14 @@ router.get('/', async (req, res) => {
             getSpotifyPlaylistTracks(user2Data.spotifyAccessToken, user2Data.spotifyRefreshToken, user2Data._id, playlist2)
         ]);
 
-        const similarity = calculateSimilarity(tracks1, tracks2);
+        const genreCounts1 = calculateGenrePercentages(tracks1);
+        const genreCounts2 = calculateGenrePercentages(tracks2);
+        const topGenres = ['pop', 'rap', 'rock', 'latino', 'hip hop', 'house', 'rnb', 'jazz', 'motown', 'country'];
 
-        res.json({ similarity: similarity.toFixed(2) });
+        // Calculate the genre similarity as 100% of the final similarity score
+        const genreSimilarity = calculateGenreSimilarity(genreCounts1, genreCounts2, topGenres);
+
+        res.json({ similarity: genreSimilarity.toFixed(2) });
     } catch (error) {
         console.error('Error comparing playlists:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -126,19 +148,24 @@ router.get('/saved-tracks', async (req, res) => {
         const tracks1 = tracks1Response.data.savedTracks;
         const tracks2 = tracks2Response.data.savedTracks;
 
-        console.log('Tracks1:', tracks1); //// TODO:: Remove when working correctly
+        console.log('Tracks1:', tracks1);
         console.log('Tracks2:', tracks2);
 
         if (!Array.isArray(tracks1) || !Array.isArray(tracks2)) {
             throw new Error('Invalid tracks data received');
         }
 
-        const similarity = calculateSimilarity(tracks1, tracks2);
+        const genreCounts1 = calculateGenrePercentages(tracks1);
+        const genreCounts2 = calculateGenrePercentages(tracks2);
+        const topGenres = ['pop', 'rap', 'rock', 'latino', 'hip hop', 'house', 'rnb', 'jazz', 'motown', 'country'];
 
-        res.json({ similarity: similarity.toFixed(2) });
+        const genreSimilarity = calculateGenreSimilarity(genreCounts1, genreCounts2, topGenres);
+
+        res.json({ similarity: genreSimilarity.toFixed(2) });
     } catch (error) {
         console.error('Error comparing saved tracks:', error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 });
+
 module.exports = router;
