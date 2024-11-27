@@ -9,6 +9,8 @@ import axios from 'axios';
 const Results = () => {
     const [currentUserTopSongs, setCurrentUserTopSongs] = useState([]);
     const [otherUserTopSongs, setOtherUserTopSongs] = useState([]);
+    const [currentUserTopArtists, setCurrentUserTopArtists] = useState([]);
+    const [otherUserTopArtists, setOtherUserTopArtists] = useState([]);
     const [otherUsername, setOtherUsername] = useState('');
     const [similarityPercentage, setSimilarityPercentage] = useState(0);
     const location = useLocation();
@@ -30,6 +32,15 @@ const Results = () => {
                 setCurrentUserTopSongs(currentUserResponse.data.topSongs);
                 setOtherUserTopSongs(otherUserResponse.data.topSongs);
 
+                const currentUserArtistsResponse = await axios.get(`http://localhost:8888/getUserTopItems/top-artists/${currentUser}`);
+                const otherUserArtistsResponse = await axios.get(`http://localhost:8888/getUserTopItems/top-artists/${otherUser}`);
+
+                console.log('Current User Top Artists:', currentUserArtistsResponse.data.topArtists);
+                console.log('Other User Top Artists:', otherUserArtistsResponse.data.topArtists);
+
+                setCurrentUserTopArtists(currentUserArtistsResponse.data.topArtists);
+                setOtherUserTopArtists(otherUserArtistsResponse.data.topArtists);
+
                 const similarityResponse = await axios.get(`http://localhost:8888/comparePlaylists/saved-tracks?user1=${currentUser}&user2=${otherUser}`);
                 setSimilarityPercentage(similarityResponse.data.similarity);
             } catch (error) {
@@ -47,6 +58,8 @@ const Results = () => {
                 otherUsername={otherUsername}
                 currentUserTopSongs={currentUserTopSongs}
                 otherUserTopSongs={otherUserTopSongs}
+                currentUserTopArtists={currentUserTopArtists}
+                otherUserTopArtists={otherUserTopArtists}
                 similarityPercentage={similarityPercentage}
             />
             <div className="aboutCircle1"></div>
